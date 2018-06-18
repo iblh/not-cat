@@ -79,6 +79,7 @@ aug = ImageDataGenerator(rotation_range=30, width_shift_range=0.1,
 	height_shift_range=0.1, shear_range=0.2, zoom_range=0.2,
 	horizontal_flip=True, fill_mode="nearest")
 
+
 # initialize the model
 print("[INFO] compiling model...")
 model = LeNet.build(width=28, height=28, depth=3, classes=2)
