@@ -31,7 +31,7 @@ model = load_model(args["model"])
 # loop over the input images
 for imagePath in imagePaths:
 	# load the image, pre-process it, and store it in the data list
-	print("loading image...")
+	print("{}: {}".format('loading image', count))
 	image = cv2.imread(imagePath)
 	image = cv2.resize(image, (28, 28))
 	image = image.astype("float") / 255.0
@@ -41,16 +41,13 @@ for imagePath in imagePaths:
 	# classify the input image
 	(notCat, cat) = model.predict(image)[0]
 
-	# build the label
-	# label = "Cat" if cat > notCat else "Not Cat"
-	# proba = cat if cat > notCat else notCat
-	# label = "{}: {:.2f}%".format(label, proba * 100)
+	# build the hits
 	count +=1
-
 	if label == 'cat':
 		hits += 1 if cat > notCat else 0
 	else:
 		hits += 1 if notCat > cat else 0
 
+# print hits accuracy
 hits = "{}: {:.2f}%".format('accuracy', hits / count * 100)
 print(hits)
